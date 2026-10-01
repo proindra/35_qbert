@@ -22,7 +22,7 @@ def cube_palette(level):
 
 def on_cube_completed(cell):
     """Called when a cube first reaches its target colour; add a flash, sound, or bonus here."""
-    pass
+    return 50
 
 
 def bonus_life_threshold():
@@ -106,7 +106,7 @@ class Game:
         self.stages[cell] += 1
         self.score += 25
         if self.stages[cell] == TARGET:
-            on_cube_completed(cell)
+            self.score += on_cube_completed(cell) or 0
 
     def hop(self, key):
         if self.state != "play" or self.player.busy:
